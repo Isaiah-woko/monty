@@ -1,17 +1,49 @@
 #include "monty.h"
 
 /**
+* create_new_node - create new node
+* @n: the data
+* Return: the node
+*/
+stack_t *create_new_node(int n)
+{
+	stack_t *new_node;
+
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
+	{
+		free(new_node);
+		exit(EXIT_FAILURE);
+	}
+	new_node->n = n;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+
+	return (new_node);
+}
+/**
 * addToStack - push to the stack at the top
-* @stack: the stack head
+* @new_node: the stack head
 * @line_number: the number of the line
 */
-void addToStack(stack_t **stack, unsigned int line_number)
+void addToStack(stack_t **new_node, unsigned int line_number)
 {
-	(void) stack, (void) line_number;
-	printf("you adding to the stack\n");
+	stack_t *current;
+
+	(void) line_number;
+	if (head == NULL)
+	{
+		head = *new_node;
+	}
+	else
+	{
+		current = head;
+		while (current->next != NULL)
+			current = current->next;
+		(*new_node)->prev = current;
+		current->next = (*new_node);
+	}
 }
-
-
 
 /**
  * monty_pall - a function  handle the pall opcode for monty
@@ -34,8 +66,6 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 		}
 	}
 }
-
-
 
 
 /**
@@ -65,7 +95,6 @@ void monty_pint(stack_t **stack, unsigned int line_number)
  * @stack: a double pointer to stack_t structure
  * @line_number: the line of the opcode
 */
-
 void monty_pop(stack_t **stack, unsigned int line_number)
 {
 	int popped;

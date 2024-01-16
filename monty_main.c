@@ -1,18 +1,37 @@
 #include "monty.h"
+stack_t *head = NULL;
+
+
+/**
+* is_empty_or_whitespace - check if str is empty of just spaces
+* @str: the string
+* Return: 1 empty 0 not empty
+*/
+int is_empty_or_whitespace(const char *str)
+{
+	while (*str)
+	{
+		if (!isspace((unsigned char)*str))
+
+		{
+			return (0);  /* Not empty or whitespace*/
+		}
+		str++;
+	}
+	return (1);  /* Empty or whitespace*/
+}
 /**
  * main - Entry point
  * @argc: the number of arguments passed
  * @argv: the argument vector of the string passed
  * Return: 0 Always success
 */
-
 int main(int argc, char **argv)
 {
 	FILE *file;
 	char *line = NULL;
 	size_t len;
 	unsigned int line_number = 0;
-	stack_t *head = NULL;
 
 	if (argc != 2)
 	{
@@ -25,8 +44,6 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
-
 	file = fopen(argv[1], "r");
 
 	if (file == NULL)
@@ -37,13 +54,31 @@ int main(int argc, char **argv)
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
-		process_line(line, line_number, &head);
+		if (is_empty_or_whitespace(line))
+		{
+			/* Skip processing for empty/whitespace lines */
+			continue;
+		}
+		process_line(line, line_number);
 	}
-
-
-
 	free(line);
+	free_dlistint();
 	fclose(file);
 
 	return (0);
+}
+/**
+* free_dlistint -function that frees a dlistint_t list.
+* @head: the head
+*/
+void free_dlistint(void)
+{
+	stack_t *current = head;
+
+	while (current != NULL)
+	{
+		free(current);
+		head = head->next;
+		current = head;
+	}
 }
