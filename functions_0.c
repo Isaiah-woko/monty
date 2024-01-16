@@ -35,3 +35,25 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+
+
+
+/**
+ * monty_pint - a function  handle the pall opcode for monty
+ * @stack: a double pointer to stack_t structure
+ * @line_number: the line of the opcode
+*/
+
+void monty_pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack != NULL)
+	{
+		stack_t *current_node = *stack;
+
+		printf("%d\n", current_node->n);
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+	}
+}

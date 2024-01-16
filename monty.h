@@ -46,5 +46,5 @@ void func_pointer(char *opcode, stack_t **stack, unsigned int line_number);
 /*stacks and queues methods (operations)*/
 void addToStack(stack_t **stack, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
-
+void monty_pint(stack_t **stack, unsigned int line_number);
 #endif/*MONTY_H*/

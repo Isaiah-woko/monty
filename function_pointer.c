@@ -7,11 +7,12 @@
 */
 void func_pointer(char *opcode, stack_t **stack, unsigned int line_number)
 {
-	int function_num = 2, i;
+	int function_num = 3, i;
 
 	instruction_t function_vector[] = {
 		{"push", addToStack},
 		{"pall", monty_pall},
+		{"pint", monty_pint},
 		{NULL, NULL}
 	};
 
@@ -20,8 +21,15 @@ void func_pointer(char *opcode, stack_t **stack, unsigned int line_number)
 		if (strcmp(opcode, function_vector[i].opcode) == 0)
 		{
 			function_vector[i].f(stack, line_number);
+			break;
 		}
 
+	}
+
+	if (i == function_num)
+	{
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		exit(EXIT_FAILURE);
 	}
 
 
