@@ -40,15 +40,16 @@ typedef struct instruction_s
 } instruction_t;
 
 extern stack_t *head;
-
+extern stack_t *top;
 /*file and command handle */
-void process_line(char *line, unsigned int line_number);
+void process_line(char *line, unsigned int line_number, FILE *file);
 char **split_commands(char *line, int *num_commands, const char *delimiters);
 void func_pointer(char *opcode, char **commands, int num_command,
-		unsigned int line_number);
+		unsigned int line_number, char *line, FILE *file);
 int isnumber(char numbers[]);
 void handle_function_push(char *opcode, char **commands, int num_command,
 			int line_number);
+void free_commands(char **commands, int numofcommands);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
 void addToStack(stack_t **new_node, unsigned int line_number);

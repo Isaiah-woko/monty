@@ -5,13 +5,14 @@
 * @line: the line number
 * @line_number: the line number of the file
 */
-void process_line(char *line, unsigned int line_number)
+void process_line(char *line, unsigned int line_number, FILE *file)
 {
 	char **words;
 	int num_command;
 
 	words = split_commands(line, &num_command, " \n");
-	func_pointer(words[0], words, num_command, line_number);
+	func_pointer(words[0], words, num_command, line_number, line, file);
+	free_commands(words, num_command);
 }
 
 /**
@@ -53,4 +54,19 @@ char **split_commands(char *line, int *num_commands, const char *delimiters)
 
 	*num_commands = i;
 	return (commands);
+}
+/**
+* free_commands - to free the commands
+* @commands: the commands to free
+* @numofcommands: the number of commands
+*/
+void free_commands(char **commands, int numofcommands)
+{
+	int i;
+
+	for (i = 0; i < numofcommands; i++)
+	{
+		free(commands[i]);
+	}
+	free(commands);
 }

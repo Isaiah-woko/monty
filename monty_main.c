@@ -1,6 +1,6 @@
 #include "monty.h"
 stack_t *head = NULL;
-
+stack_t *top = NULL;
 
 /**
 * is_empty_or_whitespace - check if str is empty of just spaces
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 			/* Skip processing for empty/whitespace lines */
 			continue;
 		}
-		process_line(line, line_number);
+		process_line(line, line_number, file);
 	}
 	free(line);
 	free_dlistint();

@@ -25,7 +25,7 @@ instruction_t *initbuiltin(void)
 */
 void func_pointer(char *opcode, char **commands, int num_command,
 
-	    unsigned int line_number)
+	    unsigned int line_number, char *line, FILE *file)
 {
 	int function_num = 3, i;
 	instruction_t *function_vector = initbuiltin();
@@ -37,12 +37,20 @@ void func_pointer(char *opcode, char **commands, int num_command,
 		if (num_command  == 1)
 		{
 			printf("L%d: usage: push integer\n", line_number);
+			free_commands(commands, num_command);
+			free(line);
+			fclose(file);
+			free_dlistint();
 			exit(EXIT_FAILURE);
 		}
 		/*meaning the argument to push is not a digit*/
 		else if (isnumber(commands[1]) == 0)
 		{
 			printf("L%d: usage: push integer\n", line_number);
+			free_commands(commands, num_command);
+			free(line);
+			fclose(file);
+			free_dlistint();
 			exit(EXIT_FAILURE);
 		}
 		/*create new_node to push*/
@@ -55,13 +63,17 @@ void func_pointer(char *opcode, char **commands, int num_command,
 		{
 			if (strcmp(opcode, function_vector[i].opcode) == 0)
 			{
-				function_vector[i].f(&head, line_number);
+				function_vector[i].f(&top, line_number);
 				break;
 			}
 		}
 		if (i == function_num)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+			free_commands(commands, num_command);
+			free(line);
+			fclose(file);
+			free_dlistint();
 			exit(EXIT_FAILURE);
 		}
 

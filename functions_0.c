@@ -43,6 +43,7 @@ void addToStack(stack_t **new_node, unsigned int line_number)
 		(*new_node)->prev = current;
 		current->next = (*new_node);
 	}
+	top = *new_node;
 }
 
 /**
@@ -62,7 +63,7 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 		while (current_node != NULL)
 		{
 			printf("%d\n", current_node->n);
-			current_node = current_node->next;
+			current_node = current_node->prev;
 		}
 	}
 }
