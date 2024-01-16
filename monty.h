@@ -53,4 +53,8 @@ void handle_function_push(char *opcode, char **commands, int num_command,
 stack_t *create_new_node(int n);
 void addToStack(stack_t **new_node, unsigned int line_number);
 void free_dlistint(void);
+void addToStack(stack_t **stack, unsigned int line_number);
+void monty_pall(stack_t **stack, unsigned int line_number);
+void monty_pint(stack_t **stack, unsigned int line_number);
+void monty_pop(stack_t **stack, unsigned int line_number);
 #endif

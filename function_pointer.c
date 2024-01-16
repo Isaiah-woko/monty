@@ -6,8 +6,12 @@
 instruction_t *initbuiltin(void)
 {
 
+
 	static instruction_t function_vector[] = {
 		{"push", addToStack},
+		{"pall", monty_pall},
+		{"pint", monty_pint},
+		{"pop", monty_pop},
 		{NULL, NULL}
 	};
 	return (function_vector);
@@ -24,8 +28,7 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	    unsigned int line_number)
 {
-	int function_num = 1;
-	int i;
+	int function_num = 4, i;
 	instruction_t *function_vector = initbuiltin();
 
 	for (i = 0; i < function_num; i++)
@@ -33,9 +36,16 @@ void func_pointer(char *opcode, char **commands, int num_command,
 		if (strcmp(opcode, function_vector[i].opcode) == 0)
 		{
 			handle_function_push(opcode, commands, num_command, line_number);
-			/*function_vector[i].f(stack, line_number);*/
+			function_vector[i].f(head, line_number);
+			break;
 		}
 
+	}
+
+	if (i == function_num)
+	{
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		exit(EXIT_FAILURE);
 	}
 
 

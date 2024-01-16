@@ -29,3 +29,6 @@
 | 3. swap | [SOON](./) |
 | 4. add | [SOON](./) |
 | 5. nop | [SOON](./) |
+
+
+gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
