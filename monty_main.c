@@ -11,7 +11,8 @@ int main(int argc, char **argv)
 	FILE *file;
 	char *line = NULL;
 	size_t len;
-	int line_number = 0;
+	unsigned int line_number = 0;
+	stack_t *head = NULL;
 
 	if (argc != 2)
 	{
@@ -36,7 +37,7 @@ int main(int argc, char **argv)
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
-		process_line(line, &line_number);
+		process_line(line, line_number, &head);
 	}
 
 
