@@ -11,6 +11,7 @@ instruction_t *initbuiltin(void)
 		{"pall", monty_pall},
 		{"pint", monty_pint},
 		{"pop", monty_pop},
+		{"nop", monty_nop},
 		{NULL, NULL}
 	};
 	return (function_vector);
@@ -27,7 +28,7 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	    unsigned int line_number, char *line, FILE *file)
 {
-	int function_num = 3, i;
+	int function_num = 4, i;
 	instruction_t *function_vector = initbuiltin();
 	stack_t *new_node;
 

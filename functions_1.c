@@ -21,3 +21,21 @@ int isnumber(char numbers[])
 	return (1);
 }
 
+
+
+/**
+ * monty_nop - a function  handle the nop opcode for monty
+ * @stack: a double pointer to stack_t structure
+ * @line_number: the line of the opcode
+*/
+
+void monty_nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+
+	/**
+	 * This function does nothing
+	 * it acts as a placeholder
+	*/
+}
