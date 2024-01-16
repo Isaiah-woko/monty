@@ -44,8 +44,6 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
-
 	file = fopen(argv[1], "r");
 
 	if (file == NULL)
@@ -63,9 +61,6 @@ int main(int argc, char **argv)
 		}
 		process_line(line, line_number);
 	}
-
-
-
 	free(line);
 	free_dlistint();
 	fclose(file);

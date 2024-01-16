@@ -46,29 +46,6 @@ void addToStack(stack_t **new_node, unsigned int line_number)
 }
 
 /**
-* isnumber - check if string contian only digit number
-* @numbers: the string number
-* Return: 1 mean ture 0 is not number
-*/
-
-int isnumber(char numbers[])
-{
-	int i = 0;
-
-	if (numbers[0] == '-')
-		i = 1;
-	while (numbers[i] != '\0')
-	{
-		if (!isdigit(numbers[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-
-
-/**
  * monty_pall - a function  handle the pall opcode for monty
  * @stack: a double pointer to stack_t structure
  * @line_number: the line of the opcode
@@ -89,8 +66,6 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 		}
 	}
 }
-
-
 
 
 /**
@@ -120,7 +95,6 @@ void monty_pint(stack_t **stack, unsigned int line_number)
  * @stack: a double pointer to stack_t structure
  * @line_number: the line of the opcode
 */
-
 void monty_pop(stack_t **stack, unsigned int line_number)
 {
 	int popped;
