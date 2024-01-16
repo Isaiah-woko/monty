@@ -1,5 +1,4 @@
 #include "monty.h"
-stack_t *head = NULL;
 stack_t *top = NULL;
 
 /**
@@ -70,19 +69,18 @@ int main(int argc, char **argv)
 }
 /**
 * free_dlistint -function that frees a dlistint_t list.
-* @head: the head
 */
 void free_dlistint(void)
 {
-	stack_t *current = head;
-	stack_t *next;
+	stack_t *current = top;
+	stack_t *prev;
 
 	while (current != NULL)
 	{
-		next = current->next;
+		prev = current->prev;
 		free(current);
-		current = next;
+		current = prev;
 	}
 
-	head = NULL;
+	top = NULL;
 }

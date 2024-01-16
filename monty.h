@@ -39,7 +39,6 @@ typedef struct instruction_s
 		void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *head;
 extern stack_t *top;
 /*file and command handle */
 void process_line(char *line, unsigned int line_number, FILE *file);

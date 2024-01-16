@@ -28,23 +28,19 @@ stack_t *create_new_node(int n)
 */
 void addToStack(stack_t **new_node, unsigned int line_number)
 {
-	stack_t *current;
 
 	(void) line_number;
-	if (head == NULL)
+	if (top == NULL)
 	{
-		head = *new_node;
+		top = *new_node;
 	}
 	else
 	{
-		current = head;
-		while (current->next != NULL)
-			current = current->next;
-		(*new_node)->prev = current;
-		current->next = (*new_node);
+		(*new_node)->prev = top;
+		top = *new_node;
 	}
-	top = *new_node;
 }
+
 
 /**
  * monty_pall - a function  handle the pall opcode for monty
