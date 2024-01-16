@@ -1,6 +1,4 @@
 #include "monty.h"
-#define _POSIX_C_SOURCE 200809L
-
 /**
  * main - Entry point
  * @argc: the number of arguments passed
@@ -10,10 +8,10 @@
 
 int main(int argc, char **argv)
 {
-	int file;
+	FILE *file;
 	char *line = NULL;
 	ssize_t line_read;
-	size_t len = 0;
+	size_t len;
 
 	if (argc != 2)
 	{
@@ -28,9 +26,9 @@ int main(int argc, char **argv)
 	}
 
 
-	file = open(argv[1], O_RDONLY);
+	file = fopen(argv[1], "r");
 
-	if (file == -1)
+	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
@@ -43,10 +41,9 @@ int main(int argc, char **argv)
 
 	if (line_read == -1)
 		perror("read");
-	close(file), free(line);
 
 	free(line);
-	close(file);
+	fclose(file);
 
 	return (0);
 }
