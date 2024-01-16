@@ -1,5 +1,5 @@
 push 1
-pint ghygh
+pint
 push 2
 pint
 push 3

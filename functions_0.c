@@ -59,13 +59,21 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 	{
 		stack_t *current_node = *stack;
 
+		/*Move to the last node in the stack*/
+		while (current_node->next != NULL)
+		{
+			current_node = current_node->next;
+		}
+
+		/*Traverse the stack in reverse order and print elements*/
 		while (current_node != NULL)
 		{
 			printf("%d\n", current_node->n);
-			current_node = current_node->next;
+			current_node = current_node->prev;
 		}
 	}
 }
+
 
 
 /**
@@ -79,6 +87,7 @@ void monty_pint(stack_t **stack, unsigned int line_number)
 	if (*stack != NULL)
 	{
 		stack_t *current_node = *stack;
+
 
 		printf("%d\n", current_node->n);
 	}
@@ -126,20 +135,3 @@ void monty_pop(stack_t **stack, unsigned int line_number)
 }
 
 
-
-/**
- * monty_nop - a function  handle the nop opcode for monty
- * @stack: a double pointer to stack_t structure
- * @line_number: the line of the opcode
-*/
-
-void monty_nop(stack_t **stack, unsigned int line_number)
-{
-	(void)stack;
-	(void)line_number;
-
-	/**
-	 * This function does nothing
-	 * it acts as a placeholder
-	*/
-}
