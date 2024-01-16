@@ -36,7 +36,8 @@ int main(int argc, char **argv)
 
 	while ((line_read = getline(&line, &len, file)) != -1)
 	{
-		printf("%s", line);
+		printf("%s", line);ls
+		
 	}
 
 	if (line_read == -1)
