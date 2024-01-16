@@ -50,6 +50,8 @@ int isnumber(char numbers[]);
 void handle_function_push(char *opcode, char **commands, int num_command,
 			int line_number);
 void free_commands(char **commands, int numofcommands);
+void handle_push_instruction(char **commands, unsigned int line_number,
+			char *line, FILE *file, int num_command);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
 void addToStack(stack_t **new_node, unsigned int line_number);
