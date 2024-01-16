@@ -39,5 +39,6 @@ typedef struct instruction_s
 		void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
+void process_line(char *line, int *line_number);
+char **split_commands(char *line, int *num_commands, const char *delimiters);
 #endif/*MONTY_H*/

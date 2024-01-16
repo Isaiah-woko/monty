@@ -10,8 +10,8 @@ int main(int argc, char **argv)
 {
 	FILE *file;
 	char *line = NULL;
-	ssize_t line_read;
 	size_t len;
+	int line_number = 0;
 
 	if (argc != 2)
 	{
@@ -33,15 +33,13 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
-	while ((line_read = getline(&line, &len, file)) != -1)
+	while (getline(&line, &len, file) != -1)
 	{
-		printf("%s", line);ls
-		
+		line_number++;
+		process_line(line, &line_number);
 	}
 
-	if (line_read == -1)
-		perror("read");
+
 
 	free(line);
 	fclose(file);
