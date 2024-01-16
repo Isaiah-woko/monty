@@ -7,12 +7,13 @@
 */
 void func_pointer(char *opcode, stack_t **stack, unsigned int line_number)
 {
-	int function_num = 3, i;
+	int function_num = 4, i;
 
 	instruction_t function_vector[] = {
 		{"push", addToStack},
 		{"pall", monty_pall},
 		{"pint", monty_pint},
+		{"pop", monty_pop},
 		{NULL, NULL}
 	};
 
