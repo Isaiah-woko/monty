@@ -4,16 +4,14 @@
 * process_line - Construct a new process line object
 * @line: the line number
 * @line_number: the line number of the file
-* @stack: the head of the stack
 */
-void process_line(char *line, unsigned int line_number, stack_t **stack)
+void process_line(char *line, unsigned int line_number)
 {
 	char **words;
-
 	int num_command;
 
 	words = split_commands(line, &num_command, " \n");
-	func_pointer(words[0], stack, line_number);
+	func_pointer(words[0], words, num_command, line_number);
 }
 
 /**

@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
-
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -39,10 +39,18 @@ typedef struct instruction_s
 		void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern stack_t *head;
+
 /*file and command handle */
-void process_line(char *line, unsigned int line_number, stack_t **stack);
+void process_line(char *line, unsigned int line_number);
 char **split_commands(char *line, int *num_commands, const char *delimiters);
-void func_pointer(char *opcode, stack_t **stack, unsigned int line_number);
+void func_pointer(char *opcode, char **commands, int num_command,
+		unsigned int line_number);
+int isnumber(char numbers[]);
+void handle_function_push(char *opcode, char **commands, int num_command,
+			int line_number);
 /*stacks and queues methods (operations)*/
-void addToStack(stack_t **stack, unsigned int line_number);
-#endif/*MONTY_H*/
+stack_t *create_new_node(int n);
+void addToStack(stack_t **new_node, unsigned int line_number);
+void free_dlistint(void);
+#endif
