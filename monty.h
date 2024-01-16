@@ -41,4 +41,6 @@ typedef struct instruction_s
 
 void process_line(char *line, int *line_number);
 char **split_commands(char *line, int *num_commands, const char *delimiters);
+void monty_pall(stack_t **stack, unsigned int line_number);
+
 #endif/*MONTY_H*/
