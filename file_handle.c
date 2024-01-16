@@ -4,6 +4,7 @@
 * process_line - Construct a new process line object
 * @line: the line number
 * @line_number: the line number of the file
+* @file: the file to free later on when we have exit
 */
 void process_line(char *line, unsigned int line_number, FILE *file)
 {

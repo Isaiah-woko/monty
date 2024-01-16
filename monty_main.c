@@ -21,15 +21,16 @@ int is_empty_or_whitespace(const char *str)
 	return (1);  /* Empty or whitespace*/
 }
 /**
- * main - Entry point
- * @argc: the number of arguments passed
- * @argv: the argument vector of the string passed
- * Return: 0 Always success
+* main - Entry point
+* @argc: the number of arguments passed
+* @argv: the argument vector of the string passed
+* Return: 0 Always success
 */
 int main(int argc, char **argv)
 {
 	FILE *file;
 	char *line = NULL;
+
 	size_t len;
 	unsigned int line_number = 0;
 
@@ -74,11 +75,14 @@ int main(int argc, char **argv)
 void free_dlistint(void)
 {
 	stack_t *current = head;
+	stack_t *next;
 
 	while (current != NULL)
 	{
+		next = current->next;
 		free(current);
-		head = head->next;
-		current = head;
+		current = next;
 	}
+
+	head = NULL;
 }
