@@ -79,14 +79,14 @@ void handle_push_instruction(char **commands, unsigned int line_number,
 	/*check if the is number after the push*/
 		if (num_command  == 1)
 		{
-			printf("L%u: usage: push integer\n", line_number);
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			free_all_located();
 			exit(EXIT_FAILURE);
 		}
 		/*meaning the argument to push is not a digit*/
 		else if (isnumber(commands[1]) == 0)
 		{
-			printf("L%u: usage: push integer\n", line_number);
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			free_all_located();
 			exit(EXIT_FAILURE);
 		}

@@ -40,14 +40,14 @@ char **split_commands(char *line, int *num_commands, const char *delimiters)
 		commands = realloc(commands, (i + 1) * sizeof(char *));
 		if (commands == NULL)
 		{
-			perror("realloc");
+			fprintf(stderr, "Error: malloc failed\n");
 			exit(EXIT_FAILURE);
 		}
 
 		commands[i] = strdup(token);
 		if (commands[i] == NULL)
 		{
-			perror("strdup");
+			fprintf(stderr, "Error: malloc failed\n");
 			exit(EXIT_FAILURE);
 		}
 

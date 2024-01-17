@@ -77,7 +77,7 @@ void init_sa_struct(void)
 	saved_struct = malloc(sizeof(sa_struct));
 	if (saved_struct == NULL)
 	{
-		perror("malloc");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	saved_struct->top = NULL;
