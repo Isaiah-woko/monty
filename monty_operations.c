@@ -88,7 +88,7 @@ void monty_div(stack_t **stack, unsigned int line_number)
 
 	middle_node = top_node->prev;
 
-	if (top_node->n == 0)
+	if (middle_node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
