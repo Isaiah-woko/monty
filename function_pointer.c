@@ -8,6 +8,7 @@ instruction_t *initbuiltin(void)
 
 
 	static instruction_t function_vector[] = {
+		{"push", monty_push},
 		{"pall", monty_pall},
 		{"pint", monty_pint},
 		{"pop", monty_pop},
@@ -41,11 +42,11 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	if (strcmp(opcode, "push") == 0)
 	{
-		handle_push_instruction(commands, line_number, num_command);
+		handle_push_instruction(commands, line_number, num_command, function_vector);
 	}
 	else
 	{
-		for (i = 0; i < function_num; i++)
+		for (i = 1; i < function_num; i++)
 		{
 			if (strcmp(opcode, function_vector[i].opcode) == 0)
 			{
@@ -67,10 +68,11 @@ void func_pointer(char *opcode, char **commands, int num_command,
 * @commands: Array of command tokens
 * @line_number: Line number in the file
 * @num_command: the number of commands
+* @function_vector: the function vector
 */
 void handle_push_instruction(char **commands, unsigned int line_number,
 
-			int num_command)
+			int num_command, instruction_t *function_vector)
 {
 	stack_t *new_node;
 
@@ -90,6 +92,6 @@ void handle_push_instruction(char **commands, unsigned int line_number,
 		}
 		/*create new_node to push*/
 		new_node =  create_new_node(atoi(commands[1]));
-		addToStack(&new_node, line_number);
+		function_vector[0].f(&new_node, line_number);
 }
 

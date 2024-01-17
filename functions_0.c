@@ -23,11 +23,11 @@ stack_t *create_new_node(int n)
 	return (new_node);
 }
 /**
-* addToStack - The opcode push pushes an element to the stack.
+* monty_push - The opcode push pushes an element to the stack.
 * @new_node: the stack head
 * @line_number: the number of the line
 */
-void addToStack(stack_t **new_node, unsigned int line_number)
+void monty_push(stack_t **new_node, unsigned int line_number)
 {
 	(void)line_number;
 	if (saved_struct->top == NULL)

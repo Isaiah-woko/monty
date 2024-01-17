@@ -63,16 +63,15 @@ void func_pointer(char *opcode, char **commands, int num_command,
 		unsigned int line_number);
 int isnumber(char numbers[]);
 void handle_function_push(char *opcode, char **commands, int num_command,
-			int line_number);
+			int line_number, instruction_t *function_vector);
 void handle_push_instruction(char **commands, unsigned int line_number,
-			 int num_command);
+		int num_command, instruction_t *function_vector);
 void free_all_located(void);
 void init_sa_struct(void);
 int getStackSize(stack_t *stack);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
-void addToStack(stack_t **new_node, unsigned int line_number);
-void addToStack(stack_t **stack, unsigned int line_number);
+void monty_push(stack_t **stack, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
 void monty_pop(stack_t **stack, unsigned int line_number);
