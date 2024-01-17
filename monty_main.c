@@ -13,8 +13,6 @@ int is_empty_or_whitespace(const char *str)
 {
 	while (*str)
 	{
-		if (*str == '#')
-			return (1);
 		if (!isspace((unsigned char)*str))
 
 		{

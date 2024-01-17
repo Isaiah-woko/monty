@@ -40,6 +40,8 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	instruction_t *function_vector = initbuiltin();
 
+	if (opcode[0] == '#')
+		return;
 	if (strcmp(opcode, "push") == 0)
 	{
 		handle_push_instruction(commands, line_number, num_command, function_vector);
