@@ -37,22 +37,31 @@ void monty_pchar(stack_t **stack, unsigned int line_number)
 
 void monty_pstr(stack_t **stack, unsigned int line_number)
 {
+	stack_t *temp = *stack;
+	(void) line_number;
+
 	if (*stack != NULL && stack != NULL)
 	{
-		if ((*stack)->n >= 0 && (*stack)->n <= 127)
-			printf("%c\n", (*stack)->n);
-		else
+		while (temp != NULL && temp->n != 0 && (_isascii(temp->n) != 0))
 		{
-			fprintf(stderr, "L%u: can't pchar, value out of range\n",
-					line_number);
-			free_all_located();
-			exit(EXIT_FAILURE);
+			printf("%c", temp->n);
+			temp = temp->prev;
 		}
+		printf("\n");
 	}
 	else
 	{
-		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
-		free_all_located();
-		exit(EXIT_FAILURE);
+		printf("\n");
 	}
+}
+/**
+ * _isascii - check if number in between ascii numbers
+ * @number: the number
+ * Return: 1 if ture 0 if not
+ */
+int _isascii(int number)
+{
+	if (number >= 0 && number <= 127)
+		return (1);
+	return (0);
 }

@@ -20,6 +20,7 @@ instruction_t *initbuiltin(void)
 		{"div", monty_div},
 		{"mod", monty_mod},
 		{"pchar", monty_pchar},
+		{"pstr", monty_pstr},
 		{NULL, NULL}
 	};
 	return (function_vector);
@@ -36,12 +37,10 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	    unsigned int line_number)
 {
-	int function_num = 12, i;
+	int function_num = 13, i;
 
 	instruction_t *function_vector = initbuiltin();
 
-	if (opcode[0] == '#')
-		return;
 	if (strcmp(opcode, "push") == 0)
 	{
 		handle_push_instruction(commands, line_number, num_command, function_vector);

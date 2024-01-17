@@ -69,6 +69,7 @@ void handle_push_instruction(char **commands, unsigned int line_number,
 void free_all_located(void);
 void init_sa_struct(void);
 int getStackSize(stack_t *stack);
+int _isascii(int number);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
 void monty_push(stack_t **stack, unsigned int line_number);
@@ -85,5 +86,6 @@ void monty_mul(stack_t **stack, unsigned int line_number);
 void monty_mod(stack_t **stack, unsigned int line_number);
 void monty_hash(stack_t **stack, unsigned int line_number);
 void monty_pchar(stack_t **stack, unsigned int line_number);
+void monty_pstr(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, int value);
 #endif
