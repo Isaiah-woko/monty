@@ -56,6 +56,9 @@ int main(int argc, char **argv)
 	{
 		line_number++;
 		saved_struct->line = line, saved_struct->file = file;
+		/*-----------if the line is comment*/
+		if (line[0] == '#')
+			continue;
 		if (is_empty_or_whitespace(line))
 		{
 			continue;
