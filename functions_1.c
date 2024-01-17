@@ -39,3 +39,23 @@ void monty_nop(stack_t **stack, unsigned int line_number)
 	 * it acts as a placeholder
 	*/
 }
+
+
+/**
+ * getStackSize - a function for getting size of stack
+ * @stack: a double pointer to stack_t structure
+ * Return: size of stack
+*/
+int getStackSize(stack_t *stack)
+{
+	const stack_t *current = stack;
+	int count = 0;
+
+	while (current != NULL)
+	{
+		count++;
+		current = current->prev;
+	}
+
+	return (count);
+}

@@ -51,6 +51,7 @@ void handle_function_push(char *opcode, char **commands, int num_command,
 void free_commands(char **commands, int numofcommands);
 void handle_push_instruction(char **commands, unsigned int line_number,
 			char *line, FILE *file, int num_command);
+int getStackSize(stack_t *stack);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
 void addToStack(stack_t **new_node, unsigned int line_number);
@@ -60,4 +61,12 @@ void monty_pall(stack_t **stack, unsigned int line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
 void monty_pop(stack_t **stack, unsigned int line_number);
 void monty_nop(stack_t **stack, unsigned int line_number);
+void monty_swap(stack_t **stack, unsigned int line_number);
+void monty_add(stack_t **stack, unsigned int line_number);
+void monty_sub(stack_t **stack, unsigned int line_number);
+void monty_div(stack_t **stack, unsigned int line_number);
+void monty_mul(stack_t **stack, unsigned int line_number);
+void monty_mod(stack_t **stack, unsigned int line_number);
+
+void push(stack_t **stack, int value);
 #endif

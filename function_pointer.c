@@ -12,6 +12,12 @@ instruction_t *initbuiltin(void)
 		{"pint", monty_pint},
 		{"pop", monty_pop},
 		{"nop", monty_nop},
+		{"swap", monty_swap},
+		{"add", monty_add},
+		{"sub", monty_sub},
+		{"mul", monty_mul},
+		{"div", monty_div},
+		{"mod", monty_mod},
 		{NULL, NULL}
 	};
 	return (function_vector);
@@ -30,7 +36,7 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	    unsigned int line_number, char *line, FILE *file)
 {
-	int function_num = 4, i;
+	int function_num = 10, i;
 
 	instruction_t *function_vector = initbuiltin();
 
