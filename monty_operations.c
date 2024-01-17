@@ -96,7 +96,7 @@ void monty_div(stack_t **stack, unsigned int line_number)
 		free_all_located();
 		exit(EXIT_FAILURE);
 	}
-	result = top_node->n / middle_node->n;
+	result = middle_node->n / top_node->n;
 
 	middle_node->n = result;
 
