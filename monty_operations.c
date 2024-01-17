@@ -48,6 +48,7 @@ void monty_sub(stack_t **stack, unsigned int line_number)
 	if (size < 2)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 
@@ -81,6 +82,7 @@ void monty_div(stack_t **stack, unsigned int line_number)
 	if (size < 2)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 
@@ -91,6 +93,7 @@ void monty_div(stack_t **stack, unsigned int line_number)
 	if (top_node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -123,6 +126,7 @@ void monty_mul(stack_t **stack, unsigned int line_number)
 	if (size < 2)
 	{
 		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 
@@ -133,6 +137,7 @@ void monty_mul(stack_t **stack, unsigned int line_number)
 	if ((top_node->n > 0 && middle_node->n > INT_MAX / top_node->n) ||
 		(top_node->n < 0 && middle_node->n < INT_MIN / top_node->n)) {
 		fprintf(stderr, "L%u: multiplication overflow\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 
@@ -163,6 +168,7 @@ void monty_mod(stack_t **stack, unsigned int line_number)
 	if (size < 2)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 
@@ -173,6 +179,7 @@ void monty_mod(stack_t **stack, unsigned int line_number)
 	if (top_node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 
