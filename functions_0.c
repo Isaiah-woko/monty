@@ -97,13 +97,15 @@ void monty_pint(stack_t **stack, unsigned int line_number)
 */
 void monty_pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
 
 	if (*stack != NULL)
 	{
-		temp = (*stack)->prev;
-		free(*stack);
-		*stack = temp;
+		stack_t *current_node = *stack;
+
+		*stack = (*stack)->prev;
+
+		free(current_node);
+
 	}
 	else
 	{

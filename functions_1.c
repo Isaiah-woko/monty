@@ -61,14 +61,23 @@ void monty_swap(stack_t **stack, unsigned int line_number)
 	}
 
 }
-/**
-* monty_add - The opcode add adds the top two elements of the stack.
-* @stack: a double pointer to stack_t structure
-* @line_number: the line of the opcode
-*/
 
-void monty_add(stack_t **stack, unsigned int line_number)
+
+/**
+ * getStackSize - a function for getting size of stack
+ * @stack: a double pointer to stack_t structure
+ * Return: size of stack
+*/
+int getStackSize(stack_t *stack)
 {
-	(void) stack;
-	(void)line_number;
+	const stack_t *current = stack;
+	int count = 0;
+
+	while (current != NULL)
+	{
+		count++;
+		current = current->prev;
+	}
+
+	return (count);
 }
