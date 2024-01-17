@@ -19,7 +19,6 @@ instruction_t *initbuiltin(void)
 		{"mul", monty_mul},
 		{"div", monty_div},
 		{"mod", monty_mod},
-		{"#", monty_hash},
 		{NULL, NULL}
 	};
 	return (function_vector);

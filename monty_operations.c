@@ -90,16 +90,13 @@ void monty_div(stack_t **stack, unsigned int line_number)
 
 	middle_node = top_node->prev;
 
-	if (middle_node->n == 0)
+	if (top_node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
 		free_all_located();
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		result = top_node->n / middle_node->n;
-	}
+	result = top_node->n / middle_node->n;
 
 	middle_node->n = result;
 

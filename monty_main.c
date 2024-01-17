@@ -1,6 +1,9 @@
 #include "monty.h"
 
 sa_struct *saved_struct;
+
+
+
 /**
 * is_empty_or_whitespace - check if str is empty of just spaces
 * @str: the string
@@ -29,7 +32,6 @@ int main(int argc, char **argv)
 {
 	FILE *file;
 	char *line = NULL;
-
 	size_t len;
 	unsigned int line_number = 0;
 
@@ -39,14 +41,12 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
 	if (access(argv[1], F_OK) == -1)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
-
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
@@ -55,14 +55,14 @@ int main(int argc, char **argv)
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
-		saved_struct->line = line;
-		saved_struct->file = file;
+		saved_struct->line = line, saved_struct->file = file;
 		if (is_empty_or_whitespace(line))
 		{
-			/* Skip processing for empty/whitespace lines */
 			continue;
 		}
-
+		/*-----------if the line is comment*/
+		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
+			continue;
 		process_line(line, line_number);
 	}
 	free_all_located();
