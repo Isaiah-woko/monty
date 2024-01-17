@@ -88,13 +88,15 @@ void monty_div(stack_t **stack, unsigned int line_number)
 
 	middle_node = top_node->prev;
 
-	if (middle_node->n == 0)
+	if (top_node->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
-	result = top_node->n / middle_node->n;
+	else
+	{
+		result = top_node->n / middle_node->n;
+	}
 
 	middle_node->n = result;
 
@@ -127,6 +129,12 @@ void monty_mul(stack_t **stack, unsigned int line_number)
 	top_node = *stack;
 
 	middle_node = top_node->prev;
+
+	if ((top_node->n > 0 && middle_node->n > INT_MAX / top_node->n) ||
+		(top_node->n < 0 && middle_node->n < INT_MIN / top_node->n)) {
+		fprintf(stderr, "L%u: multiplication overflow\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
 	result = top_node->n * middle_node->n;
 
