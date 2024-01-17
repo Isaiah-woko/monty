@@ -19,6 +19,7 @@ instruction_t *initbuiltin(void)
 		{"mul", monty_mul},
 		{"div", monty_div},
 		{"mod", monty_mod},
+		{"pchar", monty_pchar},
 		{NULL, NULL}
 	};
 	return (function_vector);
@@ -35,7 +36,7 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	    unsigned int line_number)
 {
-	int function_num = 11, i;
+	int function_num = 12, i;
 
 	instruction_t *function_vector = initbuiltin();
 
