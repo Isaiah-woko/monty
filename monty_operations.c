@@ -54,14 +54,7 @@ void monty_sub(stack_t **stack, unsigned int line_number)
 	top_node = *stack;
 	middle_node = top_node->prev;
 
-	if (top_node->n >= middle_node->n)
-	{
-		result = top_node->n - middle_node->n;
-	}
-	else
-	{
-		result = middle_node->n - top_node->n;
-	}
+	result = middle_node->n - top_node->n;
 
 	middle_node->n = result;
 
