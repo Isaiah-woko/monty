@@ -56,13 +56,14 @@ int main(int argc, char **argv)
 	{
 		line_number++;
 		saved_struct->line = line, saved_struct->file = file;
+		/*-----------if the line is comment*/
+		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
+			continue;
 		if (is_empty_or_whitespace(line))
 		{
 			continue;
 		}
-		/*-----------if the line is comment*/
-		if (line[0] == '#' || (line[0] == ' ' && line[1] == '#'))
-			continue;
+
 		process_line(line, line_number);
 	}
 	free_all_located();
