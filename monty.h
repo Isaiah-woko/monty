@@ -67,6 +67,7 @@ void monty_sub(stack_t **stack, unsigned int line_number);
 void monty_div(stack_t **stack, unsigned int line_number);
 void monty_mul(stack_t **stack, unsigned int line_number);
 void monty_mod(stack_t **stack, unsigned int line_number);
+void monty_hash(stack_t **stack, unsigned int line_number);
 
 void push(stack_t **stack, int value);
 #endif
