@@ -35,29 +35,47 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-		char *opcode;
-		void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-
-extern stack_t *top;
+/**
+ * struct save_instructe - struct to save results
+ * @top: the top of the stack
+ * @file: the file discripter
+ * @line: the line in the file
+ * @num_command: the number of command
+ * @commands: the commands split it into vector
+ */
+typedef struct save_instructe
+{
+	stack_t *top;
+	FILE *file;
+	char *line;
+	int num_command;
+	char **commands;
+} sa_struct;
+extern sa_struct *saved_struct;
 /*file and command handle */
-void process_line(char *line, unsigned int line_number, FILE *file);
+void process_line(char *line, unsigned int line_number);
 char **split_commands(char *line, int *num_commands, const char *delimiters);
 void func_pointer(char *opcode, char **commands, int num_command,
-		unsigned int line_number, char *line, FILE *file);
+		unsigned int line_number);
 int isnumber(char numbers[]);
 void handle_function_push(char *opcode, char **commands, int num_command,
 			int line_number);
-void free_commands(char **commands, int numofcommands);
 void handle_push_instruction(char **commands, unsigned int line_number,
-			char *line, FILE *file, int num_command);
+			 int num_command);
+void free_all_located(void);
+void init_sa_struct(void);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
 void addToStack(stack_t **new_node, unsigned int line_number);
-void free_dlistint(void);
 void addToStack(stack_t **stack, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
 void monty_pop(stack_t **stack, unsigned int line_number);
 void monty_nop(stack_t **stack, unsigned int line_number);
+void monty_swap(stack_t **stack, unsigned int line_number);
+void monty_add(stack_t **stack, unsigned int line_number);
+void free_commands(char **commands, int *numofcommands);
 #endif

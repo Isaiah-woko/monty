@@ -1,6 +1,6 @@
 #include "monty.h"
-stack_t *top = NULL;
 
+sa_struct *saved_struct;
 /**
 * is_empty_or_whitespace - check if str is empty of just spaces
 * @str: the string
@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 	size_t len;
 	unsigned int line_number = 0;
 
+	init_sa_struct();
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
@@ -54,26 +55,45 @@ int main(int argc, char **argv)
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
+		saved_struct->line = line;
+		saved_struct->file = file;
 		if (is_empty_or_whitespace(line))
 		{
 			/* Skip processing for empty/whitespace lines */
 			continue;
 		}
-		process_line(line, line_number, file);
-	}
-	free(line);
-	free_dlistint();
-	fclose(file);
 
+		process_line(line, line_number);
+	}
+	free_all_located();
 	return (0);
 }
 /**
-* free_dlistint -function that frees a dlistint_t list.
+* init_sa_struct - init save_struct value
 */
-void free_dlistint(void)
+void init_sa_struct(void)
 {
-	stack_t *current = top;
-	stack_t *prev;
+
+	saved_struct = malloc(sizeof(sa_struct));
+	if (saved_struct == NULL)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	saved_struct->top = NULL;
+	saved_struct->file = NULL;
+	saved_struct->line = NULL;
+	saved_struct->num_command = 0;
+	saved_struct->commands = NULL;
+}
+/**
+* free_all_located - free all located memory
+*/
+void free_all_located(void)
+{
+	/*free top*/
+	stack_t *current = saved_struct->top, *prev;
+	int i;
 
 	while (current != NULL)
 	{
@@ -81,6 +101,16 @@ void free_dlistint(void)
 		free(current);
 		current = prev;
 	}
+	saved_struct->top = NULL;
 
-	top = NULL;
+	/*free line and file*/
+	free(saved_struct->line), fclose(saved_struct->file);
+	/*free commands*/
+	for (i = 0; i < saved_struct->num_command; i++)
+	{
+		free(saved_struct->commands[i]);
+	}
+	if (saved_struct->num_command != 0)
+		free(saved_struct->commands);
+	free(saved_struct);
 }

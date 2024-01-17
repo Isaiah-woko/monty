@@ -13,6 +13,7 @@ stack_t *create_new_node(int n)
 	if (new_node == NULL)
 	{
 		free(new_node);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = n;
@@ -22,30 +23,31 @@ stack_t *create_new_node(int n)
 	return (new_node);
 }
 /**
-* addToStack - push to the stack at the top
+* addToStack - The opcode push pushes an element to the stack.
 * @new_node: the stack head
 * @line_number: the number of the line
 */
 void addToStack(stack_t **new_node, unsigned int line_number)
 {
-
-	(void) line_number;
-	if (top == NULL)
+	(void)line_number;
+	if (saved_struct->top == NULL)
 	{
-		top = *new_node;
+		saved_struct->top = *new_node;
 	}
 	else
 	{
-		(*new_node)->prev = top;
-		top = *new_node;
+		(*new_node)->prev = saved_struct->top;
+		saved_struct->top = *new_node;
 	}
 }
 
 
+
 /**
- * monty_pall - a function  handle the pall opcode for monty
- * @stack: a double pointer to stack_t structure
- * @line_number: the line of the opcode
+* monty_pall - The opcode pall prints all the values on the stack,
+* starting from the top of the stack.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
 */
 
 void monty_pall(stack_t **stack, unsigned int line_number)
@@ -62,62 +64,51 @@ void monty_pall(stack_t **stack, unsigned int line_number)
 			current_node = current_node->prev;
 		}
 	}
+
 }
 
 
 /**
- * monty_pint - a function  handle the pint opcode for monty
- * @stack: a double pointer to stack_t structure
- * @line_number: the line of the opcode
+* monty_pint - The opcode pint prints the value at the top of
+* the stack, followed by a new line.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
 */
 
 void monty_pint(stack_t **stack, unsigned int line_number)
 {
 	if (*stack != NULL)
 	{
-		stack_t *current_node = *stack;
-
-		printf("%d\n", current_node->n);
+		printf("%d\n", (*stack)->n);
 	}
 	else
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 }
 
 
 /**
- * monty_pop - a function  handle the pop opcode for monty
- * @stack: a double pointer to stack_t structure
- * @line_number: the line of the opcode
+* monty_pop -The opcode pop removes the top element of the stack.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
 */
 void monty_pop(stack_t **stack, unsigned int line_number)
 {
-	int popped;
+	stack_t *temp;
 
 	if (*stack != NULL)
 	{
-		stack_t *current_node = *stack;
-
-		if (current_node->next != NULL)
-		{
-			*stack = current_node->next;
-			current_node->next->prev = NULL;
-		}
-		else
-		{
-			*stack = NULL;
-		}
-
-		popped = current_node->n;
-		free(current_node);
-
-		printf("%d\n", popped);
+		temp = (*stack)->prev;
+		free(*stack);
+		*stack = temp;
 	}
 	else
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		free_all_located();
 		exit(EXIT_FAILURE);
 	}
 }

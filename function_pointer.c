@@ -12,6 +12,8 @@ instruction_t *initbuiltin(void)
 		{"pint", monty_pint},
 		{"pop", monty_pop},
 		{"nop", monty_nop},
+		{"swap", monty_swap},
+		{"add", monty_add},
 		{NULL, NULL}
 	};
 	return (function_vector);
@@ -23,20 +25,18 @@ instruction_t *initbuiltin(void)
 * @commands: the all command on the line
 * @num_command: the number of commands
 * @line_number: the number of the line
-* @line: the line on the file
-* @file: the file to free it later if we have exit
 */
 void func_pointer(char *opcode, char **commands, int num_command,
 
-	    unsigned int line_number, char *line, FILE *file)
+	    unsigned int line_number)
 {
-	int function_num = 4, i;
+	int function_num = 6, i;
 
 	instruction_t *function_vector = initbuiltin();
 
 	if (strcmp(opcode, "push") == 0)
 	{
-		handle_push_instruction(commands, line_number, line, file, num_command);
+		handle_push_instruction(commands, line_number, num_command);
 	}
 	else
 	{
@@ -44,15 +44,14 @@ void func_pointer(char *opcode, char **commands, int num_command,
 		{
 			if (strcmp(opcode, function_vector[i].opcode) == 0)
 			{
-				function_vector[i].f(&top, line_number);
+				function_vector[i].f(&(saved_struct->top), line_number);
 				break;
 			}
 		}
 		if (i == function_num)
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-			free_commands(commands, num_command);
-			free(line), free_dlistint(), fclose(file);
+			free_all_located();
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -63,12 +62,10 @@ void func_pointer(char *opcode, char **commands, int num_command,
 * @commands: Array of command tokens
 * @line_number: Line number in the file
 * @num_command: the number of commands
-* @line: the line on the file
-* @file: the file to free it later if we have exit
 */
 void handle_push_instruction(char **commands, unsigned int line_number,
 
-			char *line, FILE *file, int num_command)
+			int num_command)
 {
 	stack_t *new_node;
 
@@ -76,16 +73,14 @@ void handle_push_instruction(char **commands, unsigned int line_number,
 		if (num_command  == 1)
 		{
 			printf("L%d: usage: push integer\n", line_number);
-			free_commands(commands, num_command);
-			free(line), fclose(file), free_dlistint();
+			free_all_located();
 			exit(EXIT_FAILURE);
 		}
 		/*meaning the argument to push is not a digit*/
 		else if (isnumber(commands[1]) == 0)
 		{
 			printf("L%d: usage: push integer\n", line_number);
-			free_commands(commands, num_command);
-			free(line), free_dlistint(), fclose(file);
+			free_all_located();
 			exit(EXIT_FAILURE);
 		}
 		/*create new_node to push*/

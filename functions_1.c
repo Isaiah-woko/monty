@@ -21,12 +21,10 @@ int isnumber(char numbers[])
 	return (1);
 }
 
-
-
 /**
- * monty_nop - a function  handle the nop opcode for monty
- * @stack: a double pointer to stack_t structure
- * @line_number: the line of the opcode
+* monty_nop - The opcode nop doesn’t do anything.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
 */
 
 void monty_nop(stack_t **stack, unsigned int line_number)
@@ -38,4 +36,39 @@ void monty_nop(stack_t **stack, unsigned int line_number)
 	 * This function does nothing
 	 * it acts as a placeholder
 	*/
+}
+/**
+* monty_swap - The opcode swap swaps the top two elements of the stack.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
+*/
+
+void monty_swap(stack_t **stack, unsigned int line_number)
+{
+	int temp_value;
+
+	if (*stack != NULL && (*stack)->prev != NULL)
+	{
+		temp_value = (*stack)->n;
+		(*stack)->n = (*stack)->prev->n;
+		(*stack)->prev->n = temp_value;
+	}
+	else
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		free_all_located();
+		exit(EXIT_FAILURE);
+	}
+
+}
+/**
+* monty_add - The opcode add adds the top two elements of the stack.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
+*/
+
+void monty_add(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+	(void)line_number;
 }
