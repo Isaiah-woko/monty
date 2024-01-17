@@ -15,6 +15,9 @@ void process_line(char *line, unsigned int line_number)
 	saved_struct->commands = words;
 	func_pointer(words[0], words, num_command, line_number);
 	free_commands(words, &num_command);
+	saved_struct->num_command = num_command;
+	saved_struct->commands = words;
+
 }
 
 /**

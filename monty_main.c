@@ -13,6 +13,8 @@ int is_empty_or_whitespace(const char *str)
 {
 	while (*str)
 	{
+		if (*str == '#')
+			return (1);
 		if (!isspace((unsigned char)*str))
 
 		{
@@ -56,9 +58,7 @@ int main(int argc, char **argv)
 	{
 		line_number++;
 		saved_struct->line = line, saved_struct->file = file;
-		/*-----------if the line is comment*/
-		if (line[0] == '#')
-			continue;
+		/*-----------if the line is comment or only space*/
 		if (is_empty_or_whitespace(line))
 		{
 			continue;
