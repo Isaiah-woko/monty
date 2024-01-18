@@ -99,7 +99,7 @@ void monty_rotl(stack_t **stack, unsigned int line_number)
 
 
 /**
- * monty_rotr - The opcode rotl rotates the stack to the top.
+ * monty_rotr - The opcode rotr rotates the stack to the top.
  * @stack: a double pointer to stack_t structure
  * @line_number: the line of the opcode
 */
