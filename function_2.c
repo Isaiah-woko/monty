@@ -65,3 +65,33 @@ int _isascii(int number)
 		return (1);
 	return (0);
 }
+
+
+/**
+ * monty_rotl - The opcode rotl rotates the stack to the top.
+ * @stack: a double pointer to stack_t structure
+ * @line_number: the line of the opcode
+*/
+
+void monty_rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *top_node, *second_node;
+	(void)line_number;
+
+	top_node = *stack;
+
+	if (top_node != NULL && top_node->prev != NULL)
+	{
+		while (top_node->prev != NULL)
+		{
+			top_node = top_node->prev;
+		}
+
+		second_node = *stack;
+		*stack = second_node->prev;
+
+		second_node->prev = NULL;
+
+		top_node->prev = second_node;
+	}
+}
