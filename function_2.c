@@ -95,3 +95,33 @@ void monty_rotl(stack_t **stack, unsigned int line_number)
 		top_node->prev = second_node;
 	}
 }
+
+
+
+/**
+ * monty_rotr - The opcode rotl rotates the stack to the top.
+ * @stack: a double pointer to stack_t structure
+ * @line_number: the line of the opcode
+*/
+
+oid monty_rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *last_node;
+	(void)line_number;
+
+	if (*stack != NULL && (*stack)->prev != NULL)
+	{
+		last_node = *stack;
+
+		while (last_node->prev != NULL)
+		{
+			last_node = last_node->prev;
+		}
+
+		last_node->prev = *stack;
+		*stack = last_node->prev;
+		last_node->prev = NULL;
+
+		*stack = last_node;
+	}
+}
