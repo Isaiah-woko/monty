@@ -60,6 +60,8 @@ typedef struct save_instructe
 	int stack_or_queue;
 } sa_struct;
 extern sa_struct *saved_struct;
+
+
 /*file and command handle */
 void process_line(char *line, unsigned int line_number);
 char **split_commands(char *line, int *num_commands, const char *delimiters);
@@ -74,6 +76,8 @@ void free_all_located(void);
 void init_sa_struct(void);
 int getStackSize(stack_t *stack);
 int _isascii(int number);
+
+
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
 void monty_push_stack(stack_t **stack, unsigned int line_number);
@@ -84,7 +88,6 @@ void monty_pop(stack_t **stack, unsigned int line_number);
 void monty_nop(stack_t **stack, unsigned int line_number);
 void monty_swap(stack_t **stack, unsigned int line_number);
 void monty_add(stack_t **stack, unsigned int line_number);
-void free_commands(char **commands, int *numofcommands);
 void monty_sub(stack_t **stack, unsigned int line_number);
 void monty_div(stack_t **stack, unsigned int line_number);
 void monty_mul(stack_t **stack, unsigned int line_number);
@@ -93,4 +96,5 @@ void monty_pchar(stack_t **stack, unsigned int line_number);
 void monty_pstr(stack_t **stack, unsigned int line_number);
 void monty_rotl(stack_t **stack, unsigned int line_number);
 void monty_rotr(stack_t **stack, unsigned int line_number);
+void free_commands(char **commands, int *numofcommands);
 #endif
