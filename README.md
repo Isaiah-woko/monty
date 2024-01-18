@@ -60,4 +60,20 @@ Before using the Monty interpreter, make sure you have the following installed o
    ```bash
    git clone https://github.com/Isaiah-woko/monty.git
 
+2. Cd into the directory
+
+	```bash
+	cd monty
+
+3. run the monty interpreter
+
+	```bash
+	./monty path/to/your/file.m
+
+### Authors
+
+- [Isaiah Woko](https://github.com/isaiah-woko)
+- [Ahed Eisa](https://github.com/be-great)
+
+
 gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
