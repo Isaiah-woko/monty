@@ -1,5 +1,10 @@
 # Project: 0x19. C - Stacks, Queues - LIFO, FIFO
 
+## Overview
+
+The Monty project is a simple interpreter for a subset of the Monty Bytecode language. It processes Monty bytecode files, executes the instructions, and produces the desired output. This README file provides essential information about the project, its functionalities, and how to use it.
+
+
 ## Resources
 
 #### Read or watch:
@@ -19,16 +24,25 @@
 * What are the common implementations of stacks and queues
 * What are the most common use cases of stacks and queues
 * What is the proper way to use global variables
-## Tasks
 
-| Task | File |
-| ---- | ---- |
-| 0. push, pall | [SOON](./) |
-| 1. pint | [SOON](./) |
-| 2. pop | [SOON](./) |
-| 3. swap | [SOON](./) |
-| 4. add | [SOON](./) |
-| 5. nop | [SOON](./) |
+## Features
 
+The Monty project supports the following opcodes:
+
+- `push`: Pushes an element to the stack.
+- `pall`: Prints all the values on the stack, starting from the top.
+- `pint`: Prints the value at the top of the stack.
+- `pop`: Removes the top element from the stack.
+- `nop`: Does nothing.
+- `swap`: Swaps the top two elements of the stack.
+- `add`: Adds the top two elements of the stack.
+- `sub`: Subtracts the top element of the stack from the second top element.
+- `mul`: Multiplies the top two elements of the stack.
+- `div`: Divides the second top element of the stack by the top element.
+- `mod`: Computes the remainder of the division of the second top element by the top element.
+- `pchar`: Prints the character at the top of the stack.
+- `pstr`: Prints the string starting at the top of the stack.
+- `rotl`: Rotates the stack to the top.
+- `rotr`: Rotates the stack to the bottom.
 
 gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
