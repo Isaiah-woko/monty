@@ -82,10 +82,12 @@ void init_sa_struct(void)
 		exit(EXIT_FAILURE);
 	}
 	saved_struct->top = NULL;
+	saved_struct->front = NULL;
 	saved_struct->file = NULL;
 	saved_struct->line = NULL;
 	saved_struct->num_command = 0;
 	saved_struct->commands = NULL;
+	saved_struct->stack_or_queue = 0;
 }
 /**
 * free_all_located - free all located memory

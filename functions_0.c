@@ -24,21 +24,43 @@ stack_t *create_new_node(int n)
 	return (new_node);
 }
 /**
-* monty_push - The opcode push pushes an element to the stack.
+* monty_push_stack - The opcode push pushes an element to the stack.
 * @new_node: the stack head
 * @line_number: the number of the line
 */
-void monty_push(stack_t **new_node, unsigned int line_number)
+void monty_push_stack(stack_t **new_node, unsigned int line_number)
 {
 	(void)line_number;
 	if (saved_struct->top == NULL)
 	{
 		saved_struct->top = *new_node;
+		saved_struct->front = *new_node;
 	}
 	else
 	{
 		(*new_node)->prev = saved_struct->top;
 		saved_struct->top = *new_node;
+	}
+}
+
+/**
+* monty_push_queue - The opcode push pushes an element at the begnining.
+* @new_node: the stack head
+* @line_number: the number of the line
+*/
+void monty_push_queue(stack_t **new_node, unsigned int line_number)
+{
+	(void)line_number;
+	if (saved_struct->front == NULL)
+	{
+		saved_struct->top = *new_node;
+		saved_struct->front = *new_node;
+	}
+	else
+	{
+		saved_struct->front->prev = *new_node;
+		(*new_node)->next = saved_struct->front;
+		saved_struct->front = *new_node;
 	}
 }
 
@@ -91,27 +113,3 @@ void monty_pint(stack_t **stack, unsigned int line_number)
 }
 
 
-/**
-* monty_pop -The opcode pop removes the top element of the stack.
-* @stack: a double pointer to stack_t structure
-* @line_number: the line of the opcode
-*/
-void monty_pop(stack_t **stack, unsigned int line_number)
-{
-
-	if (*stack != NULL)
-	{
-		stack_t *current_node = *stack;
-
-		*stack = (*stack)->prev;
-
-		free(current_node);
-
-	}
-	else
-	{
-		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-		free_all_located();
-		exit(EXIT_FAILURE);
-	}
-}

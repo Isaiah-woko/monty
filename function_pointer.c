@@ -8,7 +8,8 @@ instruction_t *initbuiltin(void)
 
 
 	static instruction_t function_vector[] = {
-		{"push", monty_push},
+		{"push_stack", monty_push_stack},
+		{"push_queue", monty_push_queue},
 		{"pall", monty_pall},
 		{"pint", monty_pint},
 		{"pop", monty_pop},
@@ -39,9 +40,20 @@ void func_pointer(char *opcode, char **commands, int num_command,
 
 	    unsigned int line_number)
 {
-	int function_num = 15, i;
+	int function_num = 16, i;
 
 	instruction_t *function_vector = initbuiltin();
+
+	if (strcmp(opcode, "stack") == 0)
+	{
+		saved_struct->stack_or_queue = 0;
+		return;
+	}
+	else if (strcmp(opcode, "queue") == 0)
+	{
+		saved_struct->stack_or_queue = 1;
+		return;
+	}
 
 	if (strcmp(opcode, "push") == 0)
 	{
@@ -49,7 +61,7 @@ void func_pointer(char *opcode, char **commands, int num_command,
 	}
 	else
 	{
-		for (i = 1; i < function_num; i++)
+		for (i = 2; i < function_num; i++)
 		{
 			if (strcmp(opcode, function_vector[i].opcode) == 0)
 			{
@@ -95,6 +107,9 @@ void handle_push_instruction(char **commands, unsigned int line_number,
 		}
 		/*create new_node to push*/
 		new_node =  create_new_node(atoi(commands[1]));
-		function_vector[0].f(&new_node, line_number);
+		if (saved_struct->stack_or_queue == 0)
+			function_vector[0].f(&new_node, line_number);
+		else
+			function_vector[1].f(&new_node, line_number);
 }
 

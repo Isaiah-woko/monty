@@ -42,18 +42,22 @@ typedef struct instruction_s
 /**
  * struct save_instructe - struct to save results
  * @top: the top of the stack
+ * @front: the front of the stack
  * @file: the file discripter
  * @line: the line in the file
  * @num_command: the number of command
  * @commands: the commands split it into vector
+ * @stack_or_queue: 0 if stack 1 if queue
  */
 typedef struct save_instructe
 {
 	stack_t *top;
+	stack_t *front;
 	FILE *file;
 	char *line;
 	int num_command;
 	char **commands;
+	int stack_or_queue;
 } sa_struct;
 extern sa_struct *saved_struct;
 /*file and command handle */
@@ -72,7 +76,8 @@ int getStackSize(stack_t *stack);
 int _isascii(int number);
 /*stacks and queues methods (operations)*/
 stack_t *create_new_node(int n);
-void monty_push(stack_t **stack, unsigned int line_number);
+void monty_push_stack(stack_t **stack, unsigned int line_number);
+void monty_push_queue(stack_t **new_node, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
 void monty_pop(stack_t **stack, unsigned int line_number);

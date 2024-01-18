@@ -85,3 +85,27 @@ int getStackSize(stack_t *stack)
 
 	return (count);
 }
+/**
+* monty_pop -The opcode pop removes the top element of the stack.
+* @stack: a double pointer to stack_t structure
+* @line_number: the line of the opcode
+*/
+void monty_pop(stack_t **stack, unsigned int line_number)
+{
+
+	if (*stack != NULL)
+	{
+		stack_t *current_node = *stack;
+
+		*stack = (*stack)->prev;
+
+		free(current_node);
+
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		free_all_located();
+		exit(EXIT_FAILURE);
+	}
+}
