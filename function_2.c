@@ -68,7 +68,8 @@ int _isascii(int number)
 
 
 /**
- * monty_rotl - The opcode rotl rotates the stack to the top.
+ * monty_rotl - The top element of the stack becomes the last one
+ * and the second top element of the stack becomes the first one
  * @stack: a double pointer to stack_t structure
  * @line_number: the line of the opcode
 */
@@ -97,32 +98,32 @@ void monty_rotl(stack_t **stack, unsigned int line_number)
 }
 
 
-
 /**
- * monty_rotr - The opcode rotr rotates the stack to the top.
+ * monty_rotr - The last element of the stack becomes
+ * the top element of the stack
  * @stack: a double pointer to stack_t structure
  * @line_number: the line of the opcode
 */
-
 void monty_rotr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *last_node;
+	stack_t *last_node, *end;
 	(void)line_number;
 
 	if (*stack != NULL && (*stack)->prev != NULL)
 	{
 		last_node = *stack;
 
-		while (last_node->prev != NULL)
+		while (last_node->prev->prev != NULL)
 		{
 			last_node = last_node->prev;
 		}
-
-		last_node->prev = *stack;
-		*stack = last_node->prev;
+		end = last_node->prev;
 		last_node->prev = NULL;
+		end->prev = *stack;
+		end->next = NULL;
+		(*stack)->next = end;
+		*stack = end;
 
-		*stack = last_node;
 	}
 }
 
