@@ -106,23 +106,23 @@ void monty_rotl(stack_t **stack, unsigned int line_number)
 
 void monty_rotr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *last_node;
+	stack_t *last_node, *current_node;
 	(void)line_number;
 
 	if (*stack != NULL && (*stack)->prev != NULL)
 	{
-		last_node = *stack;
+		current_node = *stack;
+		last_node = NULL;
 
-		while (last_node->prev != NULL)
+		while (current_node->prev != NULL)
 		{
-			last_node = last_node->prev;
+			last_node = current_node;
+			current_node = current_node->prev;
 		}
 
-		last_node->prev = *stack;
-		*stack = last_node->prev;
 		last_node->prev = NULL;
-
-		*stack = last_node;
+		current_node->prev = *stack;
+		*stack = current_node;
 	}
 }
 
