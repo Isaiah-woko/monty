@@ -125,3 +125,4 @@ void monty_rotr(stack_t **stack, unsigned int line_number)
 		*stack = last_node;
 	}
 }
+
