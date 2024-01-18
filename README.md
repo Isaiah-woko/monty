@@ -16,14 +16,6 @@ The Monty project is a simple interpreter for a subset of the Monty Bytecode lan
 * [Queue operations](https://intranet.alxswe.com/rltoken/6Y_GVoIH_rV45xd7w0a9FA)
 ## Learning Objectives
 
-### General
-
-* What do LIFO and FIFO mean
-* What is a stack, and when to use it
-* What is a queue, and when to use it
-* What are the common implementations of stacks and queues
-* What are the most common use cases of stacks and queues
-* What is the proper way to use global variables
 
 ## Features
 
