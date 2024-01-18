@@ -45,4 +45,19 @@ The Monty project supports the following opcodes:
 - `rotl`: Rotates the stack to the top.
 - `rotr`: Rotates the stack to the bottom.
 
+## Getting Started
+
+### Prerequisites
+
+Before using the Monty interpreter, make sure you have the following installed on your system:
+
+- GCC compiler
+
+### Installation
+
+1. Clone the Monty repository:
+
+   ```bash
+   git clone https://github.com/Isaiah-woko/monty.git
+
 gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
